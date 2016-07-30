@@ -15,7 +15,7 @@ var AvonURLChecker = (function iffe() {
         searchAvonURL: function(url) {
             for (var i = 0, l = document.links.length; i < l; i++) {
                 if (document.links[i].href.indexOf(publicAPI.getAvonURL(url) !== -1)) {
-                    find document.links[i].setAttribute("target", "_blank");
+                    document.links[i].setAttribute("target", "_blank");
                 }
             }
         }
