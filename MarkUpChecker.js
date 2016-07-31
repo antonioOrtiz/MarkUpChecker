@@ -11,7 +11,7 @@ var MarkUpChecker = (function iffe() {
                         'youravon2': 'http://www2.youravon.com'
                     };
                 }
-                return URLS[arguments[i]];
+                return URLS[arguments[i - 1]];
             },
             searchURL: function() {
                 var link, url, parser, newPathName = '',
