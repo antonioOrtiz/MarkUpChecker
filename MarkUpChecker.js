@@ -40,7 +40,11 @@ var MarkUpChecker = (function iffe() {
                 avon_rep_container_id,
                 avon_rep_container_links,
                 avon_rep_container_images,
-                documentTableWrapper;
+                documentTableWrapper,
+                docBodyFirstChild,
+                full_width_container_1 = doc.getElementsByClassName('full-width-container')[1],
+                full_width_img_class_el = doc.getElementsByClassName('full-width-img')[0];
+
 
             if (!avon_rep_container) {
                 avon_rep_container = doc.createElement('div');
@@ -53,6 +57,9 @@ var MarkUpChecker = (function iffe() {
                 documentTableWrapper = doc.getElementsByClassName('marginfix')[0];
                 avon_rep_container.appendChild(documentTableWrapper);
                 doc.body.appendChild(avon_rep_container);
+                full_width_container_1.removeChild(full_width_container_1.getElementsByTagName('table')[0]);
+                full_width_img_class_el.removeAttribute('style');
+
                 
 
             } else {
@@ -83,7 +90,7 @@ var MarkUpChecker = (function iffe() {
             for (var j = 0, jlen = avon_rep_container_links.length; j < jlen; j++) { // This loop goes over the whole documents links...
                 link = avon_rep_container_links[j];
                 var domain = link.href.match(/(https?:\/\/.+?)\//)[1];
-                if (url.indexOf(domain) !== -1) { // //...and we are checking each argument passed in to see if it matches the object value stored in the getURL function e.g. like a switch statement..
+                if ((url.indexOf(domain) !== -1) && (!link.href.match(/\.(pdf)/gi))) { // //...and we are checking each argument passed in to see if it matches the object value stored in the getURL function e.g. like a switch statement..
                     parser = document.createElement('a'); //...if so we are essentially adding a blank tag to all the documents in the document
                     parser.href = link.href;
 
@@ -112,7 +119,7 @@ var MarkUpChecker = (function iffe() {
                 internal_h1 = doc.querySelectorAll('.internal_h1'),
                 sheet = doc.createElement('style');
 
-                        sheet.innerHTML = 'td.full-width-img {padding:0}table {margin: auto; max-width: 640px} .archive {font-family: Helvetica Neue, Helvetica, Arial, sans-serif !important;font-size: 13px !important;line-height: 20px !important;color: #333 !important;font-weight: 200 !important;padding: 0px 5px 0px 0px !important;} .archive a {color: #ec008c;display: inline-block;padding: 0 7px;} .file_folder {position: relative;top: 0px;padding: 0 5px;} #avon_rep_container a {font-size: 13px !important}';
+                        sheet.innerHTML = 'td.full-width-img {padding:0}table {margin: auto; max-width: 640px} .archive {font-family: Helvetica Neue, Helvetica, Arial, sans-serif !important;font-size: 13px !important;line-height: 20px !important;color: #333 !important;font-weight: 200 !important;padding: 0px 5px 0px 0px !important;} .archive a {color: #ec008c;display: inline-block;padding: 0 7px;} .file_folder {position: relative;top: 0px;padding: 0 5px;} #avon_rep_container a {font-size: 14px !important}';
 
             doc.body.appendChild(sheet);
             if (internal_h1) {
